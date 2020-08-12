@@ -1,0 +1,6 @@
+log jlink.log
+h
+exec device = STM32F303CC
+loadbin /home/blues/ADDON/stm32f_303/RLL303CC_12BIMS10_031a.bin, 0x08000000
+r
+qc

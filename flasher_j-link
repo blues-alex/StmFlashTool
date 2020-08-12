@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# by blues
+
+FLASH=${1:-$(cat baseScript.jlink |awk '$1=="loadbin" {print substr($2, 1, length($2)-1)}')}
+TMPFILE="/tmp/tmp.jlink"
+echo "Used $FLASH file."
+
+echo "log /tmp/JLink.log" >$TMPFILE
+echo "h" >>$TMPFILE
+echo "exec device = STM32F303CC" >>$TMPFILE
+echo "loadbin $FLASH 0x08000000" >>$TMPFILE
+echo "r" >>$TMPFILE
+echo "qc" >>$TMPFILE
+
+JLinkExe $TMPFILE
+rm $TMPFILE
